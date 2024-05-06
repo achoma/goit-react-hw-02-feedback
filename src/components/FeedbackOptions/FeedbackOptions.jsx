@@ -3,26 +3,23 @@ import css from './FeedbackOptions.module.css';
 
 export const FeedbackOptions = ({ onLeaveFeedback, options }) => {
   return (
-    <div className={css.feedback}>
-      {options.map((name, i) => {
-        return (
+    <ul className={css.list}>
+      {options.map(option => (
+        <li className={css.listItem} key={option}>
           <button
-            key={i + 1}
-            className={css.btn}
-            onClick={() => {
-              onLeaveFeedback(name);
-            }}
+            className={css[option]}
+            type="button"
+            onClick={() => onLeaveFeedback(option)}
           >
-            {name}
+            {option}
           </button>
-        );
-      })}
-    </div>
+        </li>
+      ))}
+    </ul>
   );
 };
 
 FeedbackOptions.propTypes = {
   onLeaveFeedback: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.oneOf(['good', 'neutral', 'bad']))
-    .isRequired,
+  options: PropTypes.array.isRequired,
 };
